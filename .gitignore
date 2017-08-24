@@ -22,13 +22,8 @@ node_modules/
 tmp/
 temp/
 hooks/
-platforms/
-plugins/
-plugins/android.json
-plugins/ios.json
-www/
 $RECYCLE.BIN/
-
+build/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
