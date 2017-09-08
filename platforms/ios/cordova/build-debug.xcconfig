@@ -24,5 +24,14 @@
 #include "build.xcconfig"
 
 GCC_PREPROCESSOR_DEFINITIONS = DEBUG=1
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/UnviredCordovaSDK" $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Cordova" "${PODS_ROOT}/Headers/Public/UnviredCordovaSDK"
+LIBRARY_SEARCH_PATHS = $(inherited) "$(PODS_ROOT)/UnviredCordovaSDK" "$PODS_CONFIGURATION_BUILD_DIR/Cordova" $(inherited) "${PODS_ROOT}/UnviredCordovaSDK"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Cordova" -isystem "${PODS_ROOT}/Headers/Public/UnviredCordovaSDK"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Cordova" -l"UnviredCordovaSDK" -l"sqlite3.0" -l"z" -framework "AVFoundation" -framework "AddressBook" -framework "AddressBookUI" -framework "AssetsLibrary" -framework "AudioToolbox" -framework "CoreGraphics" -framework "CoreLocation" -framework "Foundation" -framework "LocalAuthentication" -framework "MapKit" -framework "MessageUI" -framework "MobileCoreServices" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration" -framework "UIKit"
+PODS_BUILD_DIR = $BUILD_DIR
+PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
+PODS_ROOT = ${SRCROOT}/Pods
 
 #include "build-extras.xcconfig"

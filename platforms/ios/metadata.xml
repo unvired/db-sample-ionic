@@ -1,0 +1,10 @@
+<Application description="Unvired DB Sample" name="UnviredDBSample" namespace="UNVIRED" package="com.unvired.sample.db" version="1.0">
+    <BusinessEntity attachments="false" description="Contact" name="CONTACT" onConflict="SERVER_WINS" save="true">
+        <header className="com.unvired.sample.db.be.CONTACT_HEADER" description="Contact Details" name="CONTACT_HEADER">
+            <Field description="Contact Id" isGid="true" length="10" mandatory="true" name="ContactId" sqlType="INTEGER"/>
+            <Field description="Contact Name" isGid="false" length="50" mandatory="false" name="ContactName" sqlType="TEXT"/>
+            <Field description="Phone" isGid="false" length="10" mandatory="false" name="Phone" sqlType="TEXT"/>
+            <Field description="Email" isGid="false" length="50" mandatory="false" name="Email" sqlType="TEXT"/>
+        </header>
+    </BusinessEntity>
+</Application>

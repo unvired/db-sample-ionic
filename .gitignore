@@ -12,6 +12,8 @@ log.txt
 .vscode/
 npm-debug.log*
 
+.gradle/
+Pods
 .idea/
 .sass-cache/
 .tmp/

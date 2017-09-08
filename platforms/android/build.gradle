@@ -311,3 +311,6 @@ for (def func : cdvPluginPostBuildExtras) {
 if (hasProperty('postBuildExtras')) {
     postBuildExtras()
 }
+dependencies{
+ compile 'com.unvired:android-cordova-sdk:+'
+}

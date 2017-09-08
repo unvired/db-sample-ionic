@@ -41,7 +41,8 @@
     },
     "devDependencies": {
         "@ionic/app-scripts": "2.1.4",
-        "typescript": "2.3.4"
+        "typescript": "2.3.4",
+        "unvired-cordova-sdk": "^3.0.60"
     },
     "cordovaPlugins": [
         "cordova-plugin-whitelist",

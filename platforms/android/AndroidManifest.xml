@@ -8,7 +8,21 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        
+</activity>
+
+<activity android:name="com.unvired.ui.LoginActivity" />
+<activity android:name="com.unvired.ui.Home" />
+<activity android:name="com.unvired.ui.ApplicationStatusTabPage" />
+<activity android:name="com.unvired.ui.LogActivity" />
+<activity android:name="com.unvired.ui.InfoMessagesActivity" />
+<activity android:name="com.unvired.ui.InfoMessageDetailsActivity" />
+<activity android:name="com.unvired.ui.SystemCredentials" />
+<activity android:name="com.unvired.ui.AboutUsActivity" />
+<activity android:name="com.unvired.ui.DemoModeSelectionActivity" />
+<activity android:name="com.unvired.ui.ServerErrorMessageActivity" />
+<activity android:name="com.unvired.ui.VersionUpgradeActivity" />
+<activity android:name="com.unvired.ui.ErrorMessageActivity" />
     </application>
     <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="25" />
 </manifest>
