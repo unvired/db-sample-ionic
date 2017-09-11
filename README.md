@@ -15,7 +15,7 @@ npm  : 3.10.10
 OS   : macOS Sierra
 ```
 
-Clone Unvired DB Sample Project
+# Clone Unvired DB Sample Project
 
 Clone the GitHub Project by executing the following command in Terminal.
 
