@@ -3,16 +3,16 @@ Ionic sample application integrating with databases
 
 ```
 $ ionic info
-Your system information:
+cli packages: (/usr/local/lib/node_modules)
 
-Cordova CLI: 6.5.0 
-Ionic CLI Version: 2.2.2
-Ionic App Lib Version: 2.2.1
-ios-deploy version: 1.9.1 
-ios-sim version: 6.0.0 
-OS: macOS Sierra
-Node Version: v7.9.0
-Xcode version: Xcode 8.3.3 Build version 8E3004b
+@ionic/cli-utils  : 1.9.2
+ionic (Ionic CLI) : 3.9.2
+
+System:
+
+Node : v6.11.2
+npm  : 3.10.10 
+OS   : macOS Sierra
 ```
 
 Clone Unvired DB Sample Project
@@ -47,6 +47,9 @@ Note: After you install cocoapods, make sure you set it up by executing the foll
 ```
 $ pod setup
 ```
+
+**Install Unvired SDK**
+-----------------------
 
 In Terminal, do a cd into ios folder.
 
