@@ -32,6 +32,21 @@
     <feature name="Keyboard">
         <param name="ios-package" onload="true" value="IonicKeyboard" />
     </feature>
+    <feature name="DatabasePlugin">
+        <param name="ios-package" value="IOSDatabasePlugin" />
+    </feature>
+    <feature name="LoggerPlugin">
+        <param name="ios-package" value="IOSLoggerPlugin" />
+    </feature>
+    <feature name="SyncEnginePlugin">
+        <param name="ios-package" value="IOSSyncEnginePlugin" />
+    </feature>
+    <feature name="SettingsPlugin">
+        <param name="ios-package" value="IOSSettingsPlugin" />
+    </feature>
+    <feature name="LoginPlugin">
+        <param name="ios-package" value="IOSLoginPlugin" />
+    </feature>
     <name>db-sample-ionic</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>

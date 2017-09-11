@@ -15,15 +15,20 @@
 
 <ion-content padding>
   <div>
-    <input type="text" placeholder="Contact Id" class="input" [(ngModel)]="cityName" />
-    <input type="text" placeholder="Name" class="input" [(ngModel)]="cityName" />
+    <input type="number" placeholder="Contact Id" class="input" [(ngModel)]="contactHeader.ContactId" />
+    <input type="text" placeholder="Name" class="input" [(ngModel)]="contactHeader.ContactName" />
     <div>
       <br>
-      <button ion-button round class="button">Search</button>
+      <button ion-button round class="button" (click)="searchButtonClicked()">Search</button>
     </div>
-    <div class="info-div">
-      <ion-list>
-      </ion-list>
+    <div style="margin-top: 25px;">
+      <ion-item-group *ngFor="let model of UIModels">
+        <ion-item-divider color="light" class="header" sticky>{{model.section}}</ion-item-divider>
+        <ion-item *ngFor="let conatct of model.contactHeaders">
+          <label>{{conatct.ContactName}}</label><br>
+          <label style="color:darkgray">{{conatct.ContactId}}</label>
+        </ion-item>
+      </ion-item-group>
     </div>
   </div>
 </ion-content>

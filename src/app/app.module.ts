@@ -8,13 +8,15 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { GetContact } from '../pages/get-contact/get-contact';
 import { AddContact } from "../pages/add-contact/add-contact";
+import { LoginPage } from "../pages/login/login";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     GetContact,
-    AddContact
+    AddContact,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { AddContact } from "../pages/add-contact/add-contact";
     MyApp,
     HomePage,
     GetContact,
-    AddContact
+    AddContact,
+    LoginPage
   ],
   providers: [
     StatusBar,

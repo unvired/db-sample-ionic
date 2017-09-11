@@ -12,15 +12,15 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-searchbar></ion-searchbar>
-  <ion-list>
-    <ion-list-header color="light" class="header">J</ion-list-header>
-    <ion-item>
-      <label>John Belkin</label><br>
-      <label style="color:darkgray">1234567890</label><br>
-      <label style="color:darkgray">xyz@gmail.com</label>
+  <ion-searchbar (ionInput)="filterData($event)"></ion-searchbar>
+  <ion-item-group *ngFor="let model of UIModels">
+    <ion-item-divider color="light" class="header" sticky>{{model.section}}</ion-item-divider>
+    <ion-item *ngFor="let conatct of model.contactHeaders" (click)="viewPersonDetail(person)">
+      <label>{{conatct.ContactName}}</label><br>
+      <label style="color:darkgray">{{conatct.Phone}}</label><br>
+      <label style="color:darkgray">{{conatct.Email}}</label>
     </ion-item>
-  </ion-list>
+  </ion-item-group>
   <ion-fab right bottom>
     <button ion-fab color="#214564" (click)="addButtonClicked()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>

@@ -15,12 +15,12 @@
 
 <ion-content padding>
   <div>
-    <input type="text" placeholder="Name" class="input" [(ngModel)]="cityName" />
-    <input type="text" placeholder="Phone" class="input" [(ngModel)]="cityName" />
-    <input type="text" placeholder="Email" class="input" [(ngModel)]="cityName" />
+    <input type="text" placeholder="Name" class="input" [(ngModel)]="contactHeader.ContactName" />
+    <input type="text" placeholder="Phone" class="input" [(ngModel)]="contactHeader.Phone" />
+    <input type="text" placeholder="Email" class="input" [(ngModel)]="contactHeader.Email" />
     <div>
       <br>
-      <button ion-button round class="button">Create</button>
+      <button ion-button round class="button" (click)="createButtonCliked()">Create</button>
     </div>
     <div class="info-div">
       <ion-list>

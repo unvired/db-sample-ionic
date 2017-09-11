@@ -19,6 +19,21 @@
         <param name="android-package" value="io.ionic.keyboard.IonicKeyboard" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="DatabasePlugin">
+        <param name="android-package" value="com.unvired.plugin.AndroidDatabasePlugin" />
+    </feature>
+    <feature name="LoggerPlugin">
+        <param name="android-package" value="com.unvired.plugin.AndroidLoggerPlugin" />
+    </feature>
+    <feature name="SyncEnginePlugin">
+        <param name="android-package" value="com.unvired.plugin.AndroidSyncEnginePlugin" />
+    </feature>
+    <feature name="SettingsPlugin">
+        <param name="android-package" value="com.unvired.plugin.AndroidSettingsPlugin" />
+    </feature>
+    <feature name="LoginPlugin">
+        <param name="android-package" value="com.unvired.plugin.AndroidLoginPlugin" />
+    </feature>
     <name>db-sample-ionic</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
