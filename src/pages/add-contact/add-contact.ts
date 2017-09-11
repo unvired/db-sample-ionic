@@ -11,83 +11,101 @@ import { AppConstant } from '../../constants/appConstant';
  */
 
 @Component({
-  selector: 'page-add-contact',
-  templateUrl: 'add-contact.html',
+    selector: 'page-add-contact',
+    templateUrl: 'add-contact.html',
 })
 
 export class AddContact {
-  private contactHeader = new CONTACT_HEADER()
+    private contactHeader = new CONTACT_HEADER()
 
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    public alertCtrl: AlertController,
-    private Loading: LoadingController,
-    public events: Events) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddContact');
-  }
-
-  createButtonCliked() {
-
-    if (this.contactHeader.ContactName == undefined || this.contactHeader.ContactName.length == 0 || this.contactHeader.ContactName == "") {
-      this.showAlert("", "Enter name.")
-      return
+    constructor(public navCtrl: NavController,
+        public navParams: NavParams,
+        public alertCtrl: AlertController,
+        private Loading: LoadingController,
+        public events: Events) {
     }
 
-    if (this.contactHeader.Phone == undefined || this.contactHeader.Phone.length == 0 || this.contactHeader.Phone == "") {
-      this.showAlert("", "Enter Phone number.")
-      return
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad AddContact');
     }
 
-    if (this.contactHeader.Email == undefined || this.contactHeader.Email.length == 0 || this.contactHeader.Email == undefined) {
-      this.showAlert("", "Enter Email.")
-      return
-    }
+    createButtonCliked() {
 
-    this.sendDataToServer()
-  }
-
-  sendDataToServer() {
-    console.log("Sending data to server.....")
-    var that = this
-    let loading = this.Loading.create({
-      content: "Please wait.",
-      dismissOnPageChange: true,
-    });
-
-    var inputHeader: any = {}
-
-    inputHeader["CONTACT_HEADER"] = this.contactHeader
-
-    loading.present()
-    ump.sync.submitInSync(ump.sync.requestType.RQST, inputHeader, null, AppConstant.PA_CREATE_CONTACT, true, function (result) {
-      loading.dismiss()
-      alert("Result:" + JSON.stringify(result))
-      if (result.type === ump.resultType.success) {
-        that.showAlert("", "Contact Added.")
-        that.events.publish('didDownloadConatct')
-      }
-      else {
-        if (result.message.length > 0) {
-          that.showAlert("", result.message)
+        if (this.contactHeader.ContactName == undefined || this.contactHeader.ContactName.length == 0 || this.contactHeader.ContactName == "") {
+            this.showAlert("", "Enter name.")
+            return
         }
-        else if (result.error.length > 0) {
-          that.showAlert("Error", result.error)
-        }
-      }
-    })
-  }
 
-  showAlert(title: string, message: string) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: message,
-      buttons: [{
-        text: 'Ok'
-      }],
-    });
-    alert.present();
-  }
+        if (this.contactHeader.Phone == undefined || this.contactHeader.Phone.length == 0 || this.contactHeader.Phone == "") {
+            this.showAlert("", "Enter Phone number.")
+            return
+        }
+
+        if (this.contactHeader.Email == undefined || this.contactHeader.Email.length == 0 || this.contactHeader.Email == undefined) {
+            this.showAlert("", "Enter Email.")
+            return
+        }
+
+        this.sendDataToServer()
+    }
+
+    sendDataToServer() {
+        console.log("Sending data to server.....")
+        var that = this
+        let loading = this.Loading.create({
+            content: "Please wait.",
+            dismissOnPageChange: true,
+        });
+
+        var inputHeader: any = {}
+
+        inputHeader["CONTACT_HEADER"] = this.contactHeader
+
+        loading.present()
+        ump.sync.submitInSync(ump.sync.requestType.RQST, inputHeader, null, AppConstant.PA_CREATE_CONTACT, false, function (result) {
+            loading.dismiss()
+           
+            if (result.type === ump.resultType.success) {
+                that.showAlert("", "Contact Added.")
+
+                let jsonObj = result.data
+                let contactObj = jsonObj.CONTACT
+
+                let contactHeader = new CONTACT_HEADER
+                contactHeader.ContactId = contactObj[0].CONTACT_HEADER.ContactId
+                contactHeader.ContactName = contactObj[0].CONTACT_HEADER.ContactName
+                contactHeader.Phone = contactObj[0].CONTACT_HEADER.Phone
+                contactHeader.Email = contactObj[0].CONTACT_HEADER.Email
+
+                ump.db.insert(AppConstant.TABLE_NAME_CONTACT_HEADER, contactHeader, true, (result: ump.callbackResult) => {
+                    if (result.type === ump.resultType.success) {
+                        console.log("Added Contact Header Successfully :" + JSON.stringify(result))
+                        that.events.publish('didDownloadConatct')
+                        that.navCtrl.pop()
+                    } else {
+                        console.log("Failure: " + JSON.stringify(result));
+                    }
+                })
+            }
+            else {
+                if (result.message.length > 0) {
+                    that.showAlert("", result.message)
+                }
+                else if (result.error.length > 0) {
+                    that.showAlert("Error", result.error)
+                }
+            }
+        })
+    }
+
+    showAlert(title: string, message: string) {
+        let alert = this.alertCtrl.create({
+            title: title,
+            subTitle: message,
+            buttons: [{
+                text: 'Ok'
+            }],
+        });
+        alert.present();
+    }
 }
