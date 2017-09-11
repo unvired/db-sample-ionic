@@ -19,13 +19,17 @@ Clone Unvired DB Sample Project
 
 Clone the GitHub Project by executing the following command in Terminal.
 
-> $ git clone https://github.com/unvired/db-sample-ionic.git
+```
+ $ git clone https://github.com/unvired/db-sample-ionic.git
+```
 
 Install npm node modules 
 
 In the Terminal app, do a cd into the project folder and execute the following command.
 
-> npm install 
+```
+ $npm install 
+```
 
 # To Run the App in iOS
 
@@ -34,15 +38,27 @@ In the Terminal app, do a cd into the project folder and execute the following c
 
 Install CocoaPods by executing the following command in the Terminal.
 
-> $ sudo gem install cocoapods
+```
+$ sudo gem install cocoapods
+```
 
 Note: After you install cocoapods, make sure you set it up by executing the following command in terminal
 
-> $ pod setup
+```
+$ pod setup
+```
 
-> $ cd platforms/ios
+In Terminal, do a cd into ios folder.
 
-> $ pod install --repo-update
+```
+ $ cd platforms/ios
+```
+
+Install Pod by running the following command.
+
+```
+$ pod install --repo-update
+```
 
 This will set up Unvired DB Sample Project with all the required dependencies.
 
