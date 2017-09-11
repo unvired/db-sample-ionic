@@ -130,6 +130,11 @@ export class GetContact {
         let jsonObj = result.data
         let contactObj = jsonObj.CONTACT
 
+        if (contactObj == undefined) {
+          that.didGetContacts = false
+          that.showAlert("", "Contact doesn't exist.")
+        }
+
         var count = contactObj.length
         for (var object of contactObj) {
           let contactHeader = new CONTACT_HEADER
@@ -179,7 +184,7 @@ export class GetContact {
         this.ngZone.run(() => {
           let uiModel = new UIModel()
           uiModel.section = letter
-          matches.sort(function(a,b) {return (a.ContactName > b.ContactName) ? 1 : ((b.ContactName > a.ContactName) ? -1 : 0);} );
+          matches.sort(function (a, b) { return (a.ContactName > b.ContactName) ? 1 : ((b.ContactName > a.ContactName) ? -1 : 0); });
           uiModel.contactHeaders = matches as [CONTACT_HEADER]
           this.UIModels.push(uiModel)
         })
