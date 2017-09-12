@@ -46,23 +46,25 @@ export class HomePage {
   }
 
   sortContactHeader(contactHeaders: CONTACT_HEADER[]) {
-    let alphabet: any = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    this.UIModels = []
-    for (var letter of alphabet) {
-      let letterInLowerCase = letter.toLowerCase;
-      let searchLetter = letter as string
+    this.ngZone.run(() => {
+      let alphabet: any = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      this.UIModels = []
+      for (var letter of alphabet) {
+        let letterInLowerCase = letter.toLowerCase;
+        let searchLetter = letter as string
 
-      var matches = contactHeaders.filter(contact => contact.ContactName.startsWith(searchLetter))
-      if (matches.length > 0) {
-        this.ngZone.run(() => {
-          let uiModel = new UIModel()
-          uiModel.section = letter
-          matches.sort(function(a,b) {return (a.ContactName > b.ContactName) ? 1 : ((b.ContactName > a.ContactName) ? -1 : 0);} );
-          uiModel.contactHeaders = matches as [CONTACT_HEADER]
-          this.UIModels.push(uiModel)
-        })
+        var matches = contactHeaders.filter(contact => contact.ContactName.startsWith(searchLetter))
+        if (matches.length > 0) {
+          this.ngZone.run(() => {
+            let uiModel = new UIModel()
+            uiModel.section = letter
+            matches.sort(function (a, b) { return (a.ContactName > b.ContactName) ? 1 : ((b.ContactName > a.ContactName) ? -1 : 0); });
+            uiModel.contactHeaders = matches as [CONTACT_HEADER]
+            this.UIModels.push(uiModel)
+          })
+        }
       }
-    }
+    })
   }
 
   menuButtonClicked() {
@@ -73,11 +75,6 @@ export class HomePage {
           handler: () => {
             console.log('Get Contacts clicked');
             this.navCtrl.push(GetContact)
-          }
-        }, {
-          text: 'Settings',
-          handler: () => {
-            console.log('Settings clicked');
           }
         }, {
           text: 'Cancel',

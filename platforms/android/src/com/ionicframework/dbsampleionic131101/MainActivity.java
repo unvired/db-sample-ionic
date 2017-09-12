@@ -21,6 +21,15 @@ package com.ionicframework.dbsampleionic131101;
 
 import android.os.Bundle;
 import org.apache.cordova.*;
+import android.Manifest;
+
+import com.unvired.exception.ApplicationException;
+import com.unvired.login.LoginParameters;
+import com.unvired.utils.FrameworkHelper;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends CordovaActivity
 {
@@ -36,6 +45,39 @@ public class MainActivity extends CordovaActivity
         }
 
         // Set by <content src="index.html" /> in config.xml
-        loadUrl(launchUrl);
+       
+      LoginParameters.setContext(this);
+    
+    InputStream metaDataXmlStream = this.getResources().openRawResource(R.raw.metadata);
+    String metaDataXml = null;
+    try {
+      metaDataXml = FrameworkHelper.getString(metaDataXmlStream);
+    } catch (ApplicationException e) {
+
     }
+    LoginParameters.setMetaDataXml(metaDataXml);
+    LoginParameters.setContext(this);
+    LoginParameters.setAppName("UnviredSAPSample");
+    LoginParameters.setLoginTypes(new LoginParameters.LOGIN_TYPE[]{LoginParameters.LOGIN_TYPE.UNVIRED_ID});
+    LoginParameters.setLoginScreenType(LoginParameters.LOGIN_SCREEN_TYPE.CUSTOM);
+    checkForPermissions();
+    loadUrl(launchUrl);
+    }
+
+      private void checkForPermissions() {
+
+    List<String> permissionList = new ArrayList();
+
+    if (!PermissionHelper.hasStoragePermission(this)) {
+      permissionList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+      permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+    if (!PermissionHelper.hasPhonePermission(this)) {
+      permissionList.add(Manifest.permission.READ_PHONE_STATE);
+    }
+
+    if (permissionList.size() > 0) {
+      PermissionHelper.requestPermissions(this, permissionList);
+    }
+  }
 }

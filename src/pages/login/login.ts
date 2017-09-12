@@ -35,14 +35,7 @@ export class LoginPage {
   }
   
   login() {
-    
-        // if (this.device.platform.toLowerCase() == "android") {
-        //   if (!this.isHasPermissions) {
-        //     this.checkRequiredPermission();
-        //     return;
-        //   }
-        // }
-    
+               
         if (!this.isAuthenticationSuccess) {
           if (!this.url || this.url.trim().length == 0) {
             this.showAlert("", "Enter Url.");
@@ -113,26 +106,7 @@ export class LoginPage {
         });
       }
     
-      // Check for permission
-      checkRequiredPermission() {
-        var permissions = cordova.plugins.permission
-        var list = [
-          permissions.READ_PHONE_STATE,
-          permissions.WRITE_EXTERNAL_STORAGE,
-          permissions.READ_EXTERNAL_STORAGE
-        ]
-    
-        var that = this
-        permissions.requestPermissions(list, function (status) {
-          if (!status.hasPermission) {
-            alert("Permissions required to use this application not granted.Please grant Phone and Storage permissions")
-          } else {
-            that.isHasPermissions = true;
-            that.login();
-          }
-        }, function () { alert("Error while requiesting for permissions.") });
-      }
-    
+     
       // Present Home Screen 
       displayHomeScreen() {
         this.navCtrl.setRoot(HomePage)
