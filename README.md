@@ -73,3 +73,13 @@ $ sudo npm install ios-sim@latest
 ```
 More info can be found [Here](https://forum.ionicframework.com/t/error-cannot-read-property-replace-of-undefined/94532/12)
 
+
+**Using the app**
+----------------
+Compile & run the app. When the app starts you can provide the following sample credentials to login:
+```
+Company: unvired
+Username: demo
+Password: Unvired123*
+```
+
