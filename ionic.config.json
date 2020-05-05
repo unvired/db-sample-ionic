@@ -1,8 +1,0 @@
-{
-  "name": "db-sample-ionic",
-  "app_id": "",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
-}
