@@ -62,15 +62,7 @@ export class LoginPage implements OnInit {
     loginParameters.username = this.username;
     loginParameters.password = this.password;
     loginParameters.loginType = LoginType.unvired;
-    // let loginResult: LoginResult;
-    // try {
-    //   loginResult = await this.unviredCordovaSdk.login(loginParameters);
-    //   console.log('Result: ' + JSON.stringify(loginResult));
-    //   } catch (error) {
-    //   this.showAlert(AppConstant.ERROR, error);
-    //   this.unviredCordovaSdk.logError('Login Page', 'Initialize', 'Error during login: ' + error);
-    // }
-    console.log(this.isAuthenticationSuccess);
+
     switch (this.isAuthenticationSuccess) {
       case LoginListenerType.auth_activation_required:
         this.showLaoding();
@@ -100,54 +92,6 @@ export class LoginPage implements OnInit {
         break;
     }
   }
-
-  // async umpLogin() {
-  //   const loginParameters = new LoginParameters();
-  //   // loginParameters.appName = AppConstant.APPLICATION_NAME;
-  //   loginParameters.url = this.url;
-  //   loginParameters.company = this.company;
-  //   loginParameters.username = this.username;
-  //   loginParameters.password = this.password;
-  //   loginParameters.loginType = LoginType.unvired;
-  //   // loginParameters.metadataPath = '../assets/metadata.json';
-  //   let loginResult: LoginResult;
-  //   try {
-  //     loginResult = await this.unviredCordovaSdk.login(loginParameters);
-  //     console.log('Result: ' + JSON.stringify(loginResult));
-  //     switch (loginResult.type) {
-  //       case LoginListenerType.auth_activation_required:
-          
-  //         this.showLaoding();
-  //         // tslint:disable-next-line:max-line-length
-  //         const authenticateActivateResult: AuthenticateActivateResult = await this.unviredCordovaSdk.authenticateAndActivate(loginParameters);
-  //         if (authenticateActivateResult.type === AuthenticateAndActivateResultType.auth_activation_success) {
-  //           this.showAlert('', 'Successfully registered');
-  //           this.router.navigate(['/home']);
-  //         } else if (authenticateActivateResult.type === AuthenticateAndActivateResultType.auth_activation_error) {
-  //           console.log('Error during login:' + authenticateActivateResult.error);
-  //           this.showAlert('Error during login:', authenticateActivateResult.error);
-  //         }
-  //         break;
-  //       case LoginListenerType.app_requires_login:
-  //         this.showLaoding();
-  //         const authenticateLocalResult: AuthenticateLocalResult = await this.unviredCordovaSdk.authenticateLocal(loginParameters);
-  //         if (authenticateLocalResult.type === AuthenticateLocalResultType.login_success) {
-  //           this.showAlert('', 'Local Password verified Successfully');
-  //           this.router.navigate(['/home']);
-  //         } else if (authenticateLocalResult.type === AuthenticateLocalResultType.login_error) {
-  //           this.showAlert('', authenticateLocalResult.error);
-  //           console.log('Error during local login: ' + authenticateLocalResult.error);
-  //         }
-  //         break;
-  //       case LoginListenerType.login_success:
-  //         this.router.navigate(['/home']);
-  //         break;
-  //     }
-  //   } catch (error) {
-  //     this.showAlert(AppConstant.ERROR, error);
-  //     this.unviredCordovaSdk.logError('Login Page', 'Initialize', 'Error during login: ' + error);
-  //   }
-  // }
 
   async showAlert(title: string, message: string) {
     const alert = await this.alertCtrl.create({

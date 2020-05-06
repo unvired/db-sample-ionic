@@ -1,7 +1,7 @@
 <ion-content>
   <ion-title class="app-name">DB-Sample-ios</ion-title>
 
-  <ion-input class="login-credentials-input" [(ngModel)]="url" autocapitalize="off" ></ion-input>
+  <ion-input *ngIf="!isAuthenticationSuccess" class="login-credentials-input" [(ngModel)]="url" autocapitalize="off" ></ion-input>
   <ion-input class="login-credentials-input" type="text" placeholder="company" [(ngModel)]="company"></ion-input>
   <ion-input class="login-credentials-input" type="text" placeholder="Username" [(ngModel)]="username" autocapitalize="off"></ion-input>
   <ion-input class="login-credentials-input" type="password" placeholder="Password" [(ngModel)]="password"></ion-input>

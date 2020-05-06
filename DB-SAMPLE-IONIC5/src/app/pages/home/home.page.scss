@@ -26,6 +26,11 @@
   text-decoration: none;
 }
 
-ion-content ion-toolbar {
+ion-content{
   --background: translucent;
+}
+
+ion-toolbar {
+  --background: #214564;
+  --color: white;
 }
