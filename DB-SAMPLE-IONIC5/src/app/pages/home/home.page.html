@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Unvired DB Sample
+    </ion-title>
+    <ion-button fill="clear" icon-only (click)="menuButtonClicked()" slot="end">
+      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-searchbar (ionInput)="filterData($event)"></ion-searchbar>
+
+  <ion-item-group *ngFor="let model of UIModels">
+    <ion-item-divider color="light">{{model.section}}</ion-item-divider>
+    <ion-item *ngFor="let conatct of model.contactHeaders" (click)="viewPersonDetail(person)">
+      <ion-label>{{conatct.ContactName}}</ion-label><br>
+      <ion-label style="color:darkgray">{{conatct.ContactId}}</ion-label><br>
+      <!-- <ion-label style="color:darkgray">{{conatct.Email}}</ion-label> -->
+    </ion-item>
+  </ion-item-group>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" (click)="addContact()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill="clear" icon-only slot="start" (click)="goToHome()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>Add/Create Contacts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-input placeholder = "Name" [(ngModel)]="contactHeader.ContactName"></ion-input>
+  <ion-input placeholder = "Phone" [(ngModel)]="contactHeader.Phone"></ion-input>
+  <ion-input placeholder = "Email" [(ngModel)]="contactHeader.Email"></ion-input>
+
+  <ion-button shape="round" class="button" (click)="createContact()">Create</ion-button>
+
+</ion-content>
