@@ -17,6 +17,11 @@ ion-button {
     padding:.5em;
   }
 
+  ion-header {
+    padding-left: 0px !important;
+    color: white;
+  }
+
   ion-toolbar {
     --background: #214564;
     --color: white;

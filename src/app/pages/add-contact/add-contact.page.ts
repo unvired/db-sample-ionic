@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { CONTACT_HEADER } from 'src/models/CONTACT_HEADER';
-import { AlertController, NavController} from '@ionic/angular';
-import { UnviredCordovaSDK, RequestType, ResultType } from '@ionic-native/unvired-cordova-sdk/ngx';
+import { AlertController, NavController, Platform} from '@ionic/angular';
+import { UnviredCordovaSDK, RequestType, ResultType, SyncResult } from '@ionic-native/unvired-cordova-sdk/ngx';
 import { HomePageService } from 'src/app/services/home-page.service';
+import { AppConstant } from 'src/constants/appConstants';
 
 @Component({
   selector: 'app-add-contact',
@@ -11,19 +11,15 @@ import { HomePageService } from 'src/app/services/home-page.service';
   styleUrls: ['./add-contact.page.scss'],
 })
 export class AddContactPage implements OnInit {
-  private contactHeader = new CONTACT_HEADER();
+  contactHeader = new CONTACT_HEADER();
 
-  constructor(private router: Router,
-              private alertController: AlertController,
+  constructor(private alertController: AlertController,
               private unviredSDK: UnviredCordovaSDK,
               private homeService: HomePageService,
-              private navCtrl: NavController,
-              private route: ActivatedRoute) { }
+              private platform: Platform,
+              private navCtrl: NavController) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(() => {
-      this.homeService.subscription.unsubscribe();
-    });
   }
 
   goToHome() {
@@ -51,22 +47,37 @@ export class AddContactPage implements OnInit {
 
   async sendDataToServer() {
     console.log('Sending data to server.....');
-    const inputHeader: any = {};
-    inputHeader.CONTACT_HEADER = this.contactHeader;
+    let inputHeader: any = {};
+    inputHeader = {CONTACT_HEADER: this.contactHeader};
     const data = { CONTACT : [inputHeader]};
     console.log('INSERTING DATA TO SERVER');
-    const  result = await this.unviredSDK.syncForeground(RequestType.RQST, '', data, 'UNVIRED_DB_SAMPLE_PA_CREATE_CONTACT', true);
+    let result: SyncResult;
+    if (this.platform.is('ios')) {
+      result = await this.unviredSDK.syncForeground(RequestType.RQST, inputHeader, '', 'UNVIRED_DB_SAMPLE_PA_CREATE_CONTACT', true);
+    } else {
+      result = await this.unviredSDK.syncForeground(RequestType.RQST, '', data, 'UNVIRED_DB_SAMPLE_PA_CREATE_CONTACT', false);
+    }
     console.log('***RESULT****', JSON.stringify(result));
     if (result.type === ResultType.success) {
-      this.showAlert('', 'Contact Created Successfully');
+      if (result.data.CONTACT === undefined) {
+        const json = JSON.parse(result.data);
+        const data3 = json.CONTACT[0].CONTACT_HEADER;
+        const json1 = await this.unviredSDK.dbInsert(AppConstant.TABLE_NAME_CONTACT_HEADER, data3, true);
+        console.log('Insert data to db, form browser platform ' + JSON.stringify(json1));
+      } else {
+        const data1 = result.data.CONTACT[0].CONTACT_HEADER;
+        await this.unviredSDK.dbInsert(AppConstant.TABLE_NAME_CONTACT_HEADER, data1, true);
+        this.showAlert('', 'Contact Created Successfully');
+      }
     } else {
-      console.log('ERROR', result.error);
-      this.showAlert('', result.error);
+      if (result.error === '') {
+        console.log('ERROR', result.message);
+        this.showAlert('Error', result.message);
+      } else {
+        console.log('ERROR', result.error);
+        this.showAlert('Error', result.error);
+      }
     }
-    this.contactHeader.ContactName = '';
-    this.contactHeader.Phone = '';
-    this.contactHeader.Email = '';
-
     this.homeService.sub.next('');
     this.navCtrl.pop();
   }
@@ -79,5 +90,5 @@ export class AddContactPage implements OnInit {
     });
     await alert.present();
   }
-  
+
 }

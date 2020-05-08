@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons fill="clear" icon-only slot="start" (click)="goToHome()">
-      <ion-back-button></ion-back-button>
-   </ion-buttons>
-    <ion-title>Get Contacts</ion-title>
+    <ion-buttons slot="start">
+      <ion-button style="color:#f4f4f4" (click)="showAlertOnBackClick()">
+      <ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title style="color:white">Get Contacts</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,7 +16,6 @@
   <ion-button shape="round" (click)="getContact()">Search</ion-button>
 
   <ion-item-group *ngFor="let model of UIModels" class="info-div">
-    <!-- <ion-item-divider color="light">{{model.section}}</ion-item-divider> -->
     <div *ngFor="let conatct of model.contactHeaders">
       <ion-item no-lines>
         <ion-label class="label">Name </ion-label>
