@@ -37,6 +37,7 @@ export class HomePage implements OnInit {
     console.log('Get All Conatct Headers from DB.....');
     this.unviredSDK.dbSelect(AppConstant.TABLE_NAME_CONTACT_HEADER, '')
     .then((result) => {
+      console.log('Conatct Headers from DB:' + JSON.stringify(result));
       if (result.type === ResultType.success) {
           this.conatctHeaders = result.data;
           this.sortContactHeader(this.conatctHeaders);

@@ -14,5 +14,5 @@ export class CONTACT_HEADER {
 
 export class UIModel {
     section: string;
-    contactHeaders : CONTACT_HEADER[]
+    contactHeaders: CONTACT_HEADER[];
 }

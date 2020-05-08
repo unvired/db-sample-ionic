@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { AppConstant } from '../../../constants/appConstants';
 import { Router } from '@angular/router';
-import { LoginParameters, LoginResult, UnviredCordovaSDK, LoginListenerType, AuthenticateActivateResult, LoginType,
+import { LoginParameters, UnviredCordovaSDK, LoginListenerType, AuthenticateActivateResult, LoginType,
   AuthenticateAndActivateResultType, AuthenticateLocalResult, AuthenticateLocalResultType } from '@ionic-native/unvired-cordova-sdk/ngx';
 
 @Component({
@@ -13,42 +12,41 @@ import { LoginParameters, LoginResult, UnviredCordovaSDK, LoginListenerType, Aut
 export class LoginPage implements OnInit {
 
   isAuthenticationSuccess: LoginListenerType;
-  isHasPermissions: boolean = false;
-  url = "http://sandbox.unvired.io/UMP/";
-  company = "";
-  username = "";
-  password = "";
+  url = 'http://sandbox.unvired.io/UMP/';
+  company = '';
+  username = '';
+  password = '';
 
   constructor( public alertCtrl: AlertController,
                private loadingCtrl: LoadingController,
                private router: Router,
                private unviredCordovaSdk: UnviredCordovaSDK) {
-                 this.isAuthenticationSuccess = this.router.getCurrentNavigation().extras.queryParams.isAuthenticationSuccess;
-                }
+    this.isAuthenticationSuccess = this.router.getCurrentNavigation().extras.queryParams.isAuthenticationSuccess;
+  }
 
   ngOnInit() {
   }
 
-  login(){
-    
-    if(!this.url || this.url.trim().length == 0){
-      this.showAlert("","Enter url");
+  login() {
+
+    if (!this.url || this.url.trim().length === 0) {
+      this.showAlert('', 'Enter url');
       return;
     }
 
-    if(!this.company || this.company.trim().length == 0){
-      this.showAlert("","Enter company");
+    if (!this.company || this.company.trim().length === 0) {
+      this.showAlert('', 'Enter company');
       return;
     }
 
 
-    if(!this.username || this.username.trim().length == 0){
-      this.showAlert("","Enter username");
+    if (!this.username || this.username.trim().length === 0) {
+      this.showAlert('', 'Enter username');
       return;
     }
 
-    if(!this.password || this.password.trim().length == 0){
-      this.showAlert("","Enter password");
+    if (!this.password || this.password.trim().length === 0) {
+      this.showAlert('', 'Enter password');
       return;
     }
 
