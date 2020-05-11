@@ -22,10 +22,6 @@ export class AddContactPage implements OnInit {
   ngOnInit() {
   }
 
-  goToHome() {
-    this.navCtrl.pop();
-  }
-
   createContact() {
       // tslint:disable-next-line:max-line-length
       if (this.contactHeader.ContactName === undefined || this.contactHeader.ContactName.length === 0 || this.contactHeader.ContactName === '') {

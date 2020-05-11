@@ -28,17 +28,17 @@ export class LoginPage implements OnInit {
   }
 
   login() {
+    if (!this.isAuthenticationSuccess) {
+      if (!this.url || this.url.trim().length === 0) {
+        this.showAlert('', 'Enter url');
+        return;
+      }
 
-    if (!this.url || this.url.trim().length === 0) {
-      this.showAlert('', 'Enter url');
-      return;
+      if (!this.company || this.company.trim().length === 0) {
+        this.showAlert('', 'Enter company');
+        return;
+      }
     }
-
-    if (!this.company || this.company.trim().length === 0) {
-      this.showAlert('', 'Enter company');
-      return;
-    }
-
 
     if (!this.username || this.username.trim().length === 0) {
       this.showAlert('', 'Enter username');
