@@ -52,18 +52,32 @@ export class GetContactPage implements OnInit {
       result = await this.unviredSDK.syncForeground(RequestType.RQST, '', data, AppConstant.PA_GET_CONTACT, true);
       console.log('REsult from server ' + JSON.stringify(result));
     }
-
-    console.log('Response from server: ' + JSON.stringify(result));
     if (result.type === ResultType.success) {
 
       const jsonObj = result.data;
       let contactObj = jsonObj.CONTACT;
 
       if (contactObj === undefined) {
+        // tslint:disable-next-line:max-line-length
+        const result1 = await this.unviredSDK.dbSelect(AppConstant.TABLE_NAME_CONTACT_HEADER, `ContactId = '${this.contactHeader.ContactId}'`);
+        console.log('Response from Database: ' + JSON.stringify(result1));
         this.hideLoader();
-        this.showAlert('', 'Contact doesn\'t exist.');
-      }
-      if (contactObj.length === 0) {
+        this.showAlert('', 'Contact downloaded');
+        contactObj = result1.data;
+        let count = contactObj.length;
+        // contactObj = contactObj[0].CONTACT_HEADER;
+        const contactHeader = new CONTACT_HEADER();
+        contactHeader.ContactId = contactObj[0].ContactId;
+        contactHeader.ContactName = contactObj[0].ContactName;
+        contactHeader.Phone = contactObj[0].Phone;
+        contactHeader.Email = contactObj[0].Email;
+        this.downloadedConatctHeaders.push(contactHeader);
+
+        count = count - 1;
+        if (count === 0) {
+            this.sortContactHeader(this.downloadedConatctHeaders);
+          }
+      } else if (contactObj.length === 0) {
         this.hideLoader();
         this.showAlert('', 'Provide proper contact id.');
       } else {
